@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+  <script src="js/jquery-1.11.3.js"></script>
+  <title></title>
+</head>
+<body ng-controller="mainCtrl">
+<div id="header"></div>
+<!--白色导航条-->
+<div id="header_white">
+  <!--果园logo-->
+  <a href="index_00.html" class="logo"></a>
+  <!--果园导航-->
+  <ul>
+    <li>
+      <a href="index_00.html">
+        首页
+        <span>Home</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="fruit_page.html">
+        鲜果
+        <span>Fruit</span>
+      </a>
+      <i></i>
+    </li>
+    <li class="active">
+      <a href="fresh_page.html">
+        生鲜
+        <span>Fresh</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="gift_page.html">
+        礼品
+        <span>Gift</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="vip_page.html">
+        会员中心
+        <span>VIP Club</span>
+      </a>
+      <i></i>
+    </li>
+  </ul>
+  <!--搜索框-->
+  <div class="search_bar">
+    <form>
+
+      <input id="search" type="text" value="奇异果"/>
+      <a href=""> <span class="glyphicon glyphicon-search"></span> </a>
+
+      <p>热门: <a href="">橙子</a> <a href="">提子</a> <a href="">蓝莓</a> <a href="">苹果</a></p>
+
+    </form>
+  </div>
+  <!--购物车-->
+  <div class="shopping_car">
+    <a href="#"><img src="img/car_count.png" alt=""/></a>
+
+    <p ng-bind="smCarCount"></p>
+
+    <div  class="car_detail">
+      <ul id="car_detail">
+        <li ng-repeat="l in smCarList">
+
+          <div>
+            <div class="car_detail_pic">
+              <img ng-src="img/{{l.pic}}" ng-click=""/>
+            </div>
+
+            <div class="car_detail_content">
+              <p style="margin: 0">{{l.pname}}</p>
+
+              <p>￥{{l.price}}/{{l.guige}}</p>
+
+              <div>
+                <button ng-click="Reduce($event)" data="{{l.did}}" ng-disabled="{{l.count}} < 2">-</button>
+                <input type="text" value="{{l.count}}"/>
+                <button ng-click="Add($event)" data="{{l.did}}">+</button>
+                <a href="" ng-click="Delete($event)" data="{{l.did}}" data-num="{{l.count}}">删除</a>
+              </div>
+            </div>
+          </div>
+
+        </li>
+
+      </ul>
+      <div class="car_count">
+        <div>
+          <span>共 <span>{{smCarCount}}</span> 件商品</span>
+
+          <span>商品小计</span>
+          <span>{{smCarPrice}}</span>
+        </div>
+        <a href="jiesuan.html" class="btn btn-success">立即结算</a>
+      </div>
+
+    </div>
+    <div  class="car_detail_none">
+      <div>购物车中还没有商品，赶快添加吧！</div>
+    </div>
+  </div>
+</div>
+
+<div class="item_page">
+  <ul class="category">
+    <li>分类</li>
+    <li><a href=""  class="active">全部</a></li>
+    <li><a href="">调味配菜</a> </li>
+    <li><a href="">粮油速食</a> </li>
+    <li><a href="">虾蟹</a> </li>
+    <li><a href="">贝类</a> </li>
+    <li><a href="">禽蛋</a> </li>
+    <li><a href="">水产、鱼类</a> </li>
+    <li><a href="">即食刺身</a> </li>
+    <li><a href="">根茎类</a> </li>
+    <li><a href="">瓜果类</a> </li>
+    <li><a href="">茄蔬类</a> </li>
+    <li><a href="">冷冻面点</a> </li>
+    <li><a href="">牛肉</a> </li>
+    <li><a href="">羊肉</a> </li>
+    <li><a href="">猪肉</a> </li>
+    <li><a href="">和牛</a> </li>
+    <li><a href="">菌菇类</a> </li>
+    <li><a href="">豆类</a> </li>
+    <li><a href="">奶类</a> </li>
+    <li><a href="">饮品</a> </li>
+    <li><a href="">面包甜点</a> </li>
+  </ul>
+  <ul class="field">
+    <li>产地</li>
+    <li><a href="" class="active">全部</a></li>
+    <li><a href="">中国</a></li>
+    <li><a href="">美国</a></li>
+    <li><a href="">智利</a></li>
+    <li><a href="">泰国</a></li>
+    <li><a href="">西班牙</a></li>
+    <li><a href="">新西兰</a></li>
+    <li><a href="">意大利</a></li>
+    <li><a href="">墨西哥</a></li>
+    <li><a href="">越南</a></li>
+    <li><a href="">马来西亚</a></li>
+    <li><a href="">秘鲁</a></li>
+    <li><a href="">荷兰</a></li>
+    <li><a href="">南非</a></li>
+    <li><a href="">韩国</a></li>
+    <li><a href="">其它</a></li>
+  </ul>
+  <ul class="standard">
+    <li>规格</li>
+    <li><a href="" class="active">全部</a></li>
+    <li><a href="">单品</a></li>
+  </ul>
+  <ul class="compositor">
+    <li>排序</li>
+    <li><a href="" class="active">默认</a></li>
+    <li><a href="">价格从低到高</a></li>
+    <li><a href="">价格从高到低</a></li>
+  </ul>
+</div>
+<div class="item_fruit_page">
+  <ul>
+    <li ng-repeat="l in list">
+      <img ng-src="img/{{l.pic}}"/>
+      <div>{{l.pname}}<span>￥{{l.price}}</span></div>
+      <div><div>{{l.guige}}</div><a href=""></a></div>
+    </li>
+  </ul>
+</div>
+
+
+
+<div id="footer"></div>
+</body>
+<script src="js/my/shoppingCart.js"></script>
+</html>

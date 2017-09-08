@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+  <script src="js/jquery-1.11.3.js"></script>
+  <title></title>
+</head>
+<body ng-controller="mainCtrl">
+<div id="header"></div>
+<!--白色导航条-->
+<div id="header_white">
+  <!--果园logo-->
+  <a href="index_00.html" class="logo"></a>
+  <!--果园导航-->
+  <ul>
+    <li class="active">
+      <a href="">
+        首页
+        <span>Home</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="fruit_page.html">
+        鲜果
+        <span>Fruit</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="fresh_page.html">
+        生鲜
+        <span>Fresh</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="gift_page.html">
+        礼品
+        <span>Gift</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="vip_page.html">
+        会员中心
+        <span>VIP Club</span>
+      </a>
+      <i></i>
+    </li>
+  </ul>
+  <!--搜索框-->
+  <div class="search_bar">
+    <form>
+
+      <input id="search" type="text" value="奇异果"/>
+      <a href=""> <span class="glyphicon glyphicon-search"></span> </a>
+
+      <p>热门: <a href="">橙子</a> <a href="">提子</a> <a href="">蓝莓</a> <a href="">苹果</a></p>
+
+    </form>
+  </div>
+  <!--购物车-->
+  <div class="shopping_car">
+    <a href="#"><img src="img/car_count.png" alt=""/></a>
+
+    <p ng-bind="smCarCount"></p>
+
+    <div class="car_detail">
+      <ul id="car_detail">
+        <li ng-repeat="l in smCarList">
+
+          <div>
+            <div class="car_detail_pic">
+              <img ng-src="img/{{l.pic}}" ng-click=""/>
+            </div>
+
+            <div class="car_detail_content">
+              <p style="margin: 0">{{l.pname}}</p>
+
+              <p>￥{{l.price}}/{{l.guige}}</p>
+
+              <div>
+                <button ng-click="Reduce($event)" data="{{l.did}}" ng-disabled="{{l.count}} < 2">-</button>
+                <input type="text" value="{{l.count}}"/>
+                <button ng-click="Add($event)" data="{{l.did}}">+</button>
+                <a href="" ng-click="Delete($event)" data="{{l.did}}" data-num="{{l.count}}">删除</a>
+              </div>
+            </div>
+          </div>
+
+        </li>
+
+      </ul>
+      <div class="car_count">
+        <div>
+          <span>共 <span>{{smCarCount}}</span> 件商品</span>
+
+          <span>商品小计</span>
+          <span>{{smCarPrice}}</span>
+        </div>
+        <a href="jiesuan.html" class="btn btn-success">立即结算</a>
+      </div>
+
+    </div>
+    <div class="car_detail_none">
+      <div>购物车中还没有商品，赶快添加吧！</div>
+    </div>
+  </div>
+</div>
+<!--左侧选项卡-->
+<div class="vipClub">
+  <div class="left_card">
+    <ul>
+      <li><a href="" class="active">我的账户</a></li>
+      <li><a href="">我的订单</a></li>
+      <li><a href="">我的试吃</a></li>
+      <li><a href="">我的积分</a></li>
+      <li><a href="">账户余额</a></li>
+      <li><a href="">我的优惠券</a></li>
+      <li><a href="">我的赠品</a></li>
+      <li><a href="">券卡兑换</a></li>
+      <li><a href="">充值中心</a></li>
+      <li><a href="">充值发票</a></li>
+      <li><a href="">基本资料</a></li>
+      <li><a href="">密码修改</a></li>
+      <li><a href="">收货地址</a></li>
+      <li><a href="">通知设置</a></li>
+      <li><a href="">企业交易</a></li>
+    </ul>
+  </div>
+  <div class="right_info">
+    <div class="right_info_top">
+      <div>
+        <img src="img/vipClub.png" alt=""/>
+        <div>
+          <h4>18672332205</h4>
+          <p>您已经消费0元，购买0次</p>
+          <p>距离鲜果达人V1还需消费200元，购买2次。</p>
+        </div>
+        <p><a href="">查看等级特权</a></p>
+      </div>
+      <div>
+        <ul>
+          <li>余额：</li>
+          <li>￥0.00</li>
+          <li><a href="">立即充值 ></a></li>
+        </ul>
+        <ul>
+          <li>积分：</li>
+          <li>0</li>
+          <li><a href="">积分明细 ></a></li>
+        </ul>
+        <ul>
+          <li>优惠券：</li>
+          <li>0张</li>
+          <li><a href="">查看优惠券 ></a></li>
+        </ul>
+
+      </div>
+      <div>
+        <h4>最近订单：</h4>
+        <div>
+          <span>商品</span>
+          <ul>
+            <li>价格(元)</li>
+            <li>数量</li>
+            <li>商品操作</li>
+            <li>实付金额(元)</li>
+            <li>交易状态</li>
+            <li>操作</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="footer"></div>
+</body>
+<script src="js/my/shoppingCart.js"></script>
+</html>

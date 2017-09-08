@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+  <script src="js/jquery-1.11.3.js"></script>
+  <title></title>
+</head>
+<body ng-controller="mainCtrl">
+<div id="header02"></div>
+
+<div id="jiesuan_detail" class="container">
+  <div class="top_bar">
+    <span>我的购物车</span>
+    <span>
+      <a href="index_00.html">继续逛逛></a>
+    </span>
+  </div>
+  <div class="jiesuan_body">
+    <table>
+      <thead>
+      <tr>
+        <td width="40%">商品</td>
+        <td width="10%">规格</td>
+        <td width="10%">单价(元)</td>
+        <td width="20%">数量</td>
+        <td width="10%">原价(元)</td>
+        <td width="10%">操作</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="l in smCarList">
+        <td>
+          <div>
+            <img ng-src="img/{{l.pic}}"/>
+          </div>
+
+          <span>{{l.pname}}</span>
+        </td>
+        <td>{{l.guige}}</td>
+        <td style="color:#64A131;">￥{{l.price}}</td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-default" ng-click="Reduce($event)" data="{{l.did}}" ng-disabled="{{l.count}} < 2">-</button>
+            <input class="btn btn-default" type="text" value="{{l.count}}"/>
+            <button class="btn btn-default" ng-click="Add($event)" data="{{l.did}}">+</button>
+          </div>
+        </td>
+        <td style="color:#64A131;" ng-bind="{{l.price}}*{{l.count}} | currency : '￥'"></td>
+        <td><a href="" ng-click="Delete($event)" data="{{l.did}}">删除</a></td>
+      </tr>
+
+      </tbody>
+    </table>
+    <table class="last">
+      <tr>
+        <td width="15%">
+          <a class="btn btn-success">换购</a>
+        </td>
+        <td width="85%">全场满69加14.4换购卡士鲜酪乳三联杯（三种口味）</td>
+      </tr>
+      <tr>
+        <td width="15%">
+          <a class="btn btn-success">换购</a>
+        </td>
+        <td width="85%">全场满79加7.9换购时蔬一份</td>
+      </tr>
+      <tr>
+        <td width="15%">
+          <a class="btn btn-success">换购</a>
+        </td>
+        <td width="85%">全场满222即可低价2.2换购进口香蕉2斤</td>
+      </tr>
+      <tr>
+        <td width="15%">
+          <a class="btn btn-success">换购</a>
+        </td>
+        <td width="85%">全场满149加19.9换购苏食童子鸡750g</td>
+      </tr>
+      <tr>
+        <td width="15%">
+          <a class="btn btn-success">换购</a>
+        </td>
+        <td width="85%">全场满129加18换购越南青皮芒果2斤</td>
+      </tr>
+    </table>
+
+    <div class="pay">
+
+      <span>已选择
+        <span style="color:#64A131;font-weight: bold">{{smCarCount}}件</span> 商品 | 订单金额
+        <span style="color:#64A131;font-size:23px;font-weight: bold">￥{{smCarPrice}}</span>
+      </span>
+      <button class="btn">去结算</button>
+
+    </div>
+
+  </div>
+</div>
+
+<div id="footer"></div>
+</body>
+<script src="js/my/shoppingCart.js"></script>
+</html>

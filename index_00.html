@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+  <script src="js/jquery-1.11.3.js"></script>
+
+
+  <title>天天果园</title>
+</head>
+<body ng-controller="mainCtrl">
+
+<div id="header" class="hidden-sm hidden-xs"></div>
+
+<!--白色导航条-->
+<div id="header_white" class="hidden-sm hidden-xs">
+  <!--果园logo-->
+  <a href="index_00.html" class="logo">
+    <!--<img src="img/logo.png" alt="" class="img-responsive"/>-->
+  </a>
+  <!--果园导航-->
+  <ul>
+    <li class="active">
+      <a href="">
+        首页
+        <span>Home</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="fruit_page.html">
+        鲜果
+        <span>Fruit</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="fresh_page.html">
+        生鲜
+        <span>Fresh</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="gift_page.html">
+        礼品
+        <span>Gift</span>
+      </a>
+      <i></i>
+    </li>
+    <li>
+      <a href="vip_page.html">
+        会员中心
+        <span>VIP Club</span>
+      </a>
+      <i></i>
+    </li>
+  </ul>
+  <!--搜索框-->
+  <div class="search_bar">
+    <form>
+
+      <input id="search" type="text" value="奇异果"/>
+      <a href=""> <span class="glyphicon glyphicon-search"></span> </a>
+
+      <p>热门: <a href="">橙子</a> <a href="">提子</a> <a href="">蓝莓</a> <a href="">苹果</a></p>
+
+    </form>
+  </div>
+  <!--购物车-->
+  <div class="shopping_car">
+    <a href="#"><img src="img/car_count.png" alt=""/></a>
+
+    <p ng-bind="smCarCount"></p>
+
+    <div  class="car_detail">
+      <ul id="car_detail">
+        <li ng-repeat="l in smCarList">
+
+          <div>
+            <div class="car_detail_pic">
+              <img ng-src="img/{{l.pic}}" ng-click=""/>
+            </div>
+
+            <div class="car_detail_content">
+              <p style="margin: 0">{{l.pname}}</p>
+
+              <p>￥{{l.price}}/{{l.guige}}</p>
+
+              <div>
+                <button ng-click="Reduce($event)" data="{{l.did}}" ng-disabled="{{l.count}} < 2">-</button>
+                <input type="text" value="{{l.count}}"/>
+                <button ng-click="Add($event)" data="{{l.did}}">+</button>
+                <a href="" ng-click="Delete($event)" data="{{l.did}}" data-num="{{l.count}}">删除</a>
+              </div>
+            </div>
+          </div>
+
+        </li>
+
+      </ul>
+      <div class="car_count">
+        <div>
+          <span>共 <span>{{smCarCount}}</span> 件商品</span>
+
+          <span>商品小计</span>
+          <span>{{smCarPrice}}</span>
+        </div>
+        <a href="jiesuan.html" class="btn btn-success">立即结算</a>
+      </div>
+
+    </div>
+    <div  class="car_detail_none">
+      <div>购物车中还没有商品，赶快添加吧！</div>
+    </div>
+  </div>
+</div>
+
+<!--轮播广告-->
+<div id="bigAd" class="nav_ad_big">
+  <ul class="picAd" style="transition:1s;transform:translateX(0px)">
+    <li class="img-responsive"><a href=""><img src="img/bg01.jpg"  class="img-responsive"></a></li>
+    <li class="img-responsive"><a href=""><img src="img/bg02.jpg"  class="img-responsive"></a></li>
+    <li class="img-responsive"><a href=""><img src="img/bg03.jpg"  class="img-responsive"></a></li>
+    <li class="img-responsive"><a href=""><img src="img/bg04.jpg"  class="img-responsive"></a></li>
+    <li class="img-responsive"><a href=""><img src="img/bg05.jpg"  class="img-responsive"></a></li>
+  </ul>
+  <!--广告按钮-->
+  <div class="nav_ad_big_button">
+    <ul>
+      <li class="actived"><a class="a1" href=""></a></li>
+      <li class=""><a class="a2" href=""></a></li>
+      <li class=""><a class="a3" href=""></a></li>
+      <li class=""><a class="a4" href=""></a></li>
+      <li class=""><a class="a5" href=""></a></li>
+    </ul>
+  </div>
+</div>
+<!--4幅小导航广告图-->
+<div id="nav_smallAd_4">
+  <a href="">
+    <img src="img/nav_ad_small01.jpg" alt=""/>
+  </a>
+  <a href="">
+    <img src="img/nav_ad_small02.jpg" alt=""/>
+  </a>
+  <a href="">
+    <img src="img/nav_ad_small03.jpg" alt=""/>
+  </a>
+  <a href="">
+    <img src="img/nav_ad_small04.jpg" alt=""/>
+  </a>
+</div>
+
+<!--果园推荐-->
+<div id="main01">
+  <!--简单介绍-->
+  <div class="topAd">
+  <span>
+    <img src="img/guan_t1.png" alt=""/>
+    <a href="#">更多 ></a>
+  </span>
+  </div>
+
+  <div class="main_list">
+    <div>
+      <a href=""><img src="img/hot1.jpg" alt=""/></a>
+    </div>
+    <ul id="line01">
+      <li ng-repeat="l in list" ng-if="$index < 8">
+        <a href="detail.html">
+          <div class="hot2"><img ng-src="img/{{l.pic}}"></div>
+          <div>{{l.pname}}</div>
+          <div>￥{{l.price}}/{{l.guige}}</div>
+          <a href="" class="car" data="{{l.pid}}" ng-click="AddToCar($event)"></a>
+        </a>
+
+        <div style="background:{{l.color}}">{{l.status}}</div>
+      </li>
+    </ul>
+  </div>
+
+  <!--全球鲜果-->
+  <div class="topAd">
+  <span>
+    <img src="img/guan_t2.png" alt=""/>
+    <a href="#">更多 ></a>
+  </span>
+  </div>
+  <div class="main_list">
+    <ul id="line02">
+      <li ng-repeat="l in list" ng-if="$index > 7 && $index < 18">
+        <a href="#">
+          <div class="hot2"><img ng-src="img/{{l.pic}}"></div>
+          <div>{{l.pname}}</div>
+          <div>￥{{l.price}}/{{l.guige}}</div>
+          <a href="" class="car" data="{{l.pid}}" ng-click="AddToCar($event)"></a>
+        </a>
+
+        <div style="background:{{l.color}}">{{l.status}}</div>
+      </li>
+    </ul>
+  </div>
+
+  <img src="img/blueberry.jpg" alt=""/>
+
+  <!--生鲜美食-->
+  <div class="topAd">
+  <span>
+    <img src="img/guan_t3.png" alt=""/>
+    <a href="#">更多 ></a>
+  </span>
+  </div>
+  <div class="main_list">
+    <ul id="line03">
+      <li ng-repeat="l in list" ng-if="$index > 17 && $index < 28">
+        <a href="#">
+          <div class="hot2"><img ng-src="img/{{l.pic}}"></div>
+          <div>{{l.pname}}</div>
+          <div>￥{{l.price}}/{{l.guige}}</div>
+          <a href="" class="car" data="{{l.pid}}" ng-click="AddToCar($event)"></a>
+        </a>
+
+        <div style="background:{{l.color}}">{{l.status}}</div>
+      </li>
+    </ul>
+  </div>
+
+  <img class="cow_meet" src="img/cow_meet.jpg" alt=""/>
+
+  <!--礼品卡券-->
+  <div class="topAd">
+  <span>
+    <img src="img/guan_t4.png" alt=""/>
+    <a href="#">更多 ></a>
+  </span>
+  </div>
+  <div class="main_list">
+    <ul id="line04">
+      <li ng-repeat="l in list" ng-if="$index > 27 ">
+        <a href="#">
+          <div class="hot2"><img ng-src="img/{{l.pic}}"></div>
+          <div>{{l.pname}}</div>
+          <div>￥{{l.price}}/{{l.guige}}</div>
+          <a href="" class="car" data="{{l.pid}}" ng-click="AddToCar($event)"></a>
+        </a>
+
+        <div style="background:{{l.color}}">{{l.status}}</div>
+      </li>
+    </ul>
+  </div>
+
+
+</div>
+
+<div id="footer"></div>
+
+<!--  modal -->
+<div id="zhezhao"></div>
+<div id="modal">
+  <div><a href="" id="close_modal">×</a></div>
+  <div>
+    <img src="img/shop_car_ok.png" alt=""/>
+    <span>加入购物车成功！</span>
+  </div>
+  <span>购物车中共<span style="color:#F6AD08;"> {{smCarCount}} </span>件商品 | 商品小计 <span
+    style="color:#F6AD08;">￥{{smCarPrice}}</span>  </span>
+
+  <div>
+    <a class="btn btn-default" href="" id="close_modal01">继续购物</a>
+    <a class="btn btn-default" href="jiesuan.html">去结算</a>
+  </div>
+</div>
+
+
+</body>
+<script src="js/my/shoppingCart.js"></script>
+
+</html>

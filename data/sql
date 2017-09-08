@@ -1,0 +1,108 @@
+CREATE DATABASE fruitmall;
+use fruitmall;
+
+/**用户信息表**/
+CREATE TABLE f_user(
+  uid INT PRIMARY KEY AUTO_INCREMENT,
+  uname VARCHAR(32),
+  upwd VARCHAR(32)
+);
+INSERT INTO f_user VALUES
+(10, 'qiangdong', '123456'),
+(20, 'naicha', '456789');
+
+
+/**产品信息表**/
+CREATE TABLE product_list(
+  pid INT PRIMARY KEY AUTO_INCREMENT,
+  pname VARCHAR(64),
+  price FLOAT(8,2),
+  pic VARCHAR(32),
+  guige VARCHAR(32),
+  status VARCHAR(32),
+  color VARCHAR(32)
+);
+
+INSERT INTO product_list VALUES
+(1,'云南冰糖橙',39.90,'main01.jpg','5斤','',''),
+(2,'台湾金钻树上红凤梨',49.00,'main02.jpg','1个','第二件半价','rgba(255, 0, 0, 0.64)'),
+(3,'长柄玫瑰草莓',39.00,'main03.jpg','1盒','第二件半价','rgba(255, 0, 0, 0.64)'),
+(4,'春泉桔',29.00,'main04.jpg','2斤','第二件半价','rgba(255, 0, 0, 0.64)'),
+(5,'南非无籽青提',68.00,'main05.jpg','2斤','',''),
+(6,'新奇士美国红心脐橙',79.00,'main06.jpg','12个','',''),
+(7,'火山番茄(混色)',39.00,'main07.jpg','380g-2盒','第二件半价','rgba(255, 0, 0, 0.64)'),
+(8,'越南青皮香芒果',49.90,'main08.jpg','4斤','',''),
+(9,'情人柑',39.00,'global01.jpg','2斤','',''),
+(10,'南非无籽黑提',128.00,'global02.jpg','4斤','新品','#65A032'),
+(11,'智利Q布林',48.00,'global03.jpg','2斤','新品','#65A032'),
+(12,'法国香蕉苹果',58.00,'global04.jpg','12个','新品','#65A032'),
+(13,'美国黑福尼黑提',158.00,'global05.jpg','2斤','',''),
+(14,'海南芒果(小台农)',29.90,'global06.jpg','2斤','',''),
+(15,'智利樱桃西梅',68.00,'global07.jpg','1斤','新品','#65A032'),
+(16,'糖弹小金桔',49.90,'global08.jpg','4斤','新品','#65A032'),
+(17,'绣球红毛丹',39.00,'global09.jpg','2斤','',''),
+(18,'新奇士美国红宝石蜜柚',39.00,'global10.jpg','1个','',''),
+(19,'兰特全脂巴士杀菌牛奶',99.00,'fresh01.jpg','2L','',''),
+(20,'pelagos南美白对虾',59.00,'fresh02.jpg','500g','第二件省20','rgba(255, 0, 0, 0.64)'),
+(21,'新西兰银鳕鱼(冻南极犬牙鱼)',218.00,'fresh03.jpg','400g','',''),
+(22,'明治保加利亚LB81酸奶',19.90,'fresh04.jpg','400g','新品','#65A032'),
+(23,'明治醇壹高温杀菌乳',23.90,'fresh05.jpg','950ml','',''),
+(24,'唯品纯牛奶(950ml)',25.80,'fresh06.jpg','950ml','',''),
+(25,'新西兰牛脊骨',29.90, 'fresh07.jpg','500g','第二件9.9','rgba(255, 0, 0, 0.64)'),
+(26,'精选云南鲜银耳',45.00, 'fresh08.jpg','3朵','11.9换购','rgba(255, 0, 0, 0.64)'),
+(27,'阿根廷红虾(巨无霸L1级)',198.00,'fresh09.jpg','2000g','送礼首选','rgba(255, 0, 0, 0.64)'),
+(28,'越南巴沙鱼柳',23.80, 'fresh10.jpg','300-400g','第二件9.9','rgba(255, 0, 0, 0.64)'),
+(29,'爱的回报礼盒',188.00,'gift01.jpg','1盒','',''),
+(30,'心扉鲜果礼盒',108.00, 'gift02.jpg','1盒','',''),
+(31,'阳光普照B礼盒',118.00,'gift03.jpg','1盒','',''),
+(32,'深情厚意水果礼蓝',580.00, 'gift04.jpg','1个','',''),
+(33,'佳沛意大利金奇异果',168.00,'gift05.jpg','礼盒1盒','','');
+
+/**购物车表**/
+CREATE TABLE f_cart(
+  cid INT PRIMARY KEY AUTO_INCREMENT,
+  userId INT
+);
+INSERT INTO f_cart VALUES
+(100, 10);
+
+/**购物车详情表**/
+CREATE TABLE f_cart_detail(
+  did INT PRIMARY KEY AUTO_INCREMENT,
+  cartId INT,
+  productId INT,
+  count INT
+);
+INSERT INTO f_cart_detail VALUES
+(NULL, 100, 8, 2),
+(NULL, 100, 15, 1),
+(NULL, 100, 27, 3);
+
+/**订单信息表**/
+CREATE TABLE f_order(
+  oid INT PRIMARY KEY AUTO_INCREMENT,
+  rcvName VARCHAR(16),
+  rcvAddr VARCHAR(64),
+  rvcPhone VARCHAR(24),
+  price FLOAT(8,2),     #999999.99
+  payment INT,          #1表货到付款 2表支付宝支付 3京东支付  4在线支付
+  status INT,           #1表待付款  2表配货中  3表运输中  4表派货中   5表订单完成  6表废单
+  orderTime BIGINT,
+  userId INT
+);
+INSERT INTO f_order VALUES
+(91308000,'强东爸01','北京市海淀区太阳雨小区1#','13501234561','3800','1','1','1300123456781','10'),
+(NULL,'强东妈02','北京市海淀区太阳雨小区1#','13501234562','1200','2','2','1310123456782','10'),
+(NULL,'强东爷03','北京市海淀区太阳雨小区1#','13501234563','800','3','3','1350123456783','10'),
+(NULL,'强东弟23','北京市海淀区太阳雨小区1#','13501234565','4500','1','5','1420123456785','10');
+
+/**订单详情表**/
+CREATE TABLE f_order_detail (
+  did INT PRIMARY KEY AUTO_INCREMENT,
+  orderId INT,
+  productId INT,
+  count INT
+);
+INSERT INTO f_order_detail VALUES
+(NULL, 91308000, 15,  2),
+(NULL, 91308022, 23,  1);
